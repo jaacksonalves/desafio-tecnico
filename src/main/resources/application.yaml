@@ -16,6 +16,8 @@ spring:
 server:
   servlet:
     context-path: /api
+aplicacao:
+  host-validacao-cpf: ${VALIDACAO_CPF_URL:https://user-info.herokuapp.com}
 ---
 #testes
 spring:

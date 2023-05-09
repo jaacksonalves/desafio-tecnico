@@ -42,6 +42,10 @@ public class Associado {
     return id;
   }
 
+  public String getCpf() {
+    return cpf;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
