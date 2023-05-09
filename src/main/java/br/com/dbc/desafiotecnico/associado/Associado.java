@@ -2,6 +2,9 @@ package br.com.dbc.desafiotecnico.associado;
 
 import jakarta.persistence.*;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -17,7 +20,7 @@ public class Associado {
   @Column(unique = true)
   private String cpf;
 
-  private Instant instanteCriacao = Instant.now();
+  private LocalDateTime instanteCriacao = LocalDateTime.now();
 
   public Associado(String nome, String cpf) {
     /*
@@ -30,13 +33,26 @@ public class Associado {
     this.cpf = cpf;
   }
 
-  @Deprecated(since = "JPA ONLY")
+  @Deprecated(since = "1.0")
   /**
-   * @deprecated jpa only
+   * @deprecated hibernate only
    */
   public Associado() {}
 
   public Long getId() {
     return id;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    var associado = (Associado) o;
+    return Objects.equals(cpf, associado.cpf);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(cpf);
   }
 }

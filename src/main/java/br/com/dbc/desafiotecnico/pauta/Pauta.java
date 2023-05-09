@@ -1,7 +1,11 @@
 package br.com.dbc.desafiotecnico.pauta;
 
+import br.com.dbc.desafiotecnico.sessao.NovaSessaoRequest;
+import br.com.dbc.desafiotecnico.sessao.Sessao;
 import jakarta.persistence.*;
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -17,7 +21,10 @@ public class Pauta {
 
   private String descricao;
 
-  private Instant instanteCriacao = Instant.now();
+  @OneToOne(mappedBy = "pauta")
+  private Sessao sessao;
+
+  private LocalDateTime instanteCriacao = LocalDateTime.now();
 
   public Pauta(String titulo, String descricao) {
     /*
@@ -30,13 +37,31 @@ public class Pauta {
     this.descricao = descricao;
   }
 
-  @Deprecated(since = "JPA ONLY")
+  @Deprecated(since = "1.0")
   /**
-   * @deprecated jpa only
+   * @deprecated hibernate only
    */
   public Pauta() {}
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    var pauta = (Pauta) o;
+    return Objects.equals(titulo, pauta.titulo);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(titulo);
+  }
+
   public Long getId() {
     return id;
+  }
+
+  public Sessao abreSessao(NovaSessaoRequest request) {
+    this.sessao = request.toModel(this);
+    return this.sessao;
   }
 }
