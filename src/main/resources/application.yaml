@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${APP_DATABASE_HOST:localhost}:${APP_DATABASE_PORT:5432}/${VOTACAO_DB:votacao}
+    username: ${VOTACAO_DATABASE_USER:votacao}
+    password: ${VOTACAO_DATABASE_PASS:votacao}
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: validate
+  web:
+    locale: pt_BR
+    locale-resolver: fixed
+server:
+  servlet:
+    context-path: /api
+---
+#testes
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:tc:postgresql:15-alpine:///votacao?TC_REUSABLE=true

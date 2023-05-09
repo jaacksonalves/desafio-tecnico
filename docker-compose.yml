@@ -1,12 +1,10 @@
 version: '3.8'
 services:
   postgres:
-    image: postgres:12
+    image: postgres:15-alpine
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: votacao
+      POSTGRES_PASSWORD: votacao
       POSTGRES_DB: votacao
     ports:
       - "5432:5432"
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
