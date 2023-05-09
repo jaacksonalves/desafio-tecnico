@@ -3,13 +3,13 @@ package br.com.dbc.desafiotecnico.pauta;
 import br.com.dbc.desafiotecnico.votacao.NovaSessaoRequest;
 import br.com.dbc.desafiotecnico.votacao.Sessao;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Objects;
-
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+/** jackson: Classe representa uma pauta a ser votada na Cooperativa. */
 @Entity
 @Table(name = "pautas")
 public class Pauta {
@@ -17,11 +17,9 @@ public class Pauta {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank
-  private String titulo;
+  @NotBlank private String titulo;
 
-  @NotBlank
-  private String descricao;
+  @NotBlank private String descricao;
 
   @OneToOne(mappedBy = "pauta")
   private Sessao sessao;

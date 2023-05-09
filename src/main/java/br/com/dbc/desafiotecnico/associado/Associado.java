@@ -8,6 +8,9 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+/**
+ * jackson: Classe representa um associado na Cooperativa.
+ */
 @Entity
 @Table(name = "associados")
 public class Associado {

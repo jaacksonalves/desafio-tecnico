@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 import org.springframework.util.Assert;
 
+/** jackson: Classe representa um voto de um associado em uma {@link Sessao}. */
 @Entity
 @Table(name = "votos")
 public class Voto {

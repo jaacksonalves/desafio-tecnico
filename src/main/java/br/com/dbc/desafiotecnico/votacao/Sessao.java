@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 import org.springframework.util.Assert;
 
+/** jackson: Classe representa uma sessão de votação de uma {@link Pauta}. */
 @Entity
 @Table(name = "sessoes")
 public class Sessao {

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/** jackson: classe que registra o voto de um associado em uma sessão */
 @Service
 public class RegistraVoto {
   private static final Logger logger = LoggerFactory.getLogger(RegistraVoto.class);
@@ -21,8 +22,19 @@ public class RegistraVoto {
     this.verificaAssociadoPodeVotarRemoto = verificaAssociadoPodeVotarRemoto;
   }
 
+  /**
+   * jackson: registra o voto de um associado em uma sessão
+   *
+   * @param sessao Sessao a ser votada
+   * @param associado Associado que está votando
+   * @param tipoVoto Tipo do voto do Associado
+   * @return Voto registrado
+   */
   @Transactional
   public Voto executa(Sessao sessao, Associado associado, TipoVoto tipoVoto) {
+    /*
+    jackson: verifica se o associado pode votar no sistema externo de verificação de CPF
+     */
     try {
       var statusVerificacaoCPF = verificaAssociadoPodeVotarRemoto.verifica(associado.getCpf());
       if (UNABLE_TO_VOTE.equals(statusVerificacaoCPF)) {
