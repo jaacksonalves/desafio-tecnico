@@ -1,4 +1,4 @@
-package br.com.dbc.desafiotecnico.sessao;
+package br.com.dbc.desafiotecnico.votacao;
 
 import br.com.dbc.desafiotecnico.associado.Associado;
 import jakarta.persistence.*;
@@ -55,7 +55,15 @@ public class Voto {
     return id;
   }
 
+  public TipoVoto getTipoVoto() {
+    return tipoVoto;
+  }
+
   public boolean pertenceAoAssociado(Associado associado) {
     return this.associado.equals(associado);
+  }
+
+  public boolean isVotoSim() {
+    return this.tipoVoto.equals(TipoVoto.SIM);
   }
 }

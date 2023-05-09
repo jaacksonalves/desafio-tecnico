@@ -1,11 +1,10 @@
 package br.com.dbc.desafiotecnico.pauta;
 
-import br.com.dbc.desafiotecnico.sessao.NovaSessaoRequest;
-import br.com.dbc.desafiotecnico.sessao.Sessao;
+import br.com.dbc.desafiotecnico.votacao.NovaSessaoRequest;
+import br.com.dbc.desafiotecnico.votacao.Sessao;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
-
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -58,6 +57,10 @@ public class Pauta {
 
   public Long getId() {
     return id;
+  }
+
+  public String getTitulo() {
+    return this.titulo;
   }
 
   public Sessao abreSessao(NovaSessaoRequest request) {

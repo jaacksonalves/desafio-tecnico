@@ -1,4 +1,4 @@
-package br.com.dbc.desafiotecnico.sessao;
+package br.com.dbc.desafiotecnico.votacao;
 
 import br.com.dbc.desafiotecnico.pauta.Pauta;
 import jakarta.validation.constraints.Future;

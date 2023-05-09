@@ -1,4 +1,4 @@
-package br.com.dbc.desafiotecnico.sessao;
+package br.com.dbc.desafiotecnico.votacao;
 
 import jakarta.validation.constraints.NotNull;
 

@@ -1,4 +1,4 @@
-package br.com.dbc.desafiotecnico.sessao;
+package br.com.dbc.desafiotecnico.votacao;
 
 import br.com.dbc.desafiotecnico.associado.Associado;
 import br.com.dbc.desafiotecnico.pauta.Pauta;
@@ -64,6 +64,10 @@ public class Sessao {
     return id;
   }
 
+  public String getTituloPauta() {
+    return this.pauta.getTitulo();
+  }
+
   public boolean isAberta() {
     return instanteEncerramento.isAfter(LocalDateTime.now());
   }
@@ -79,5 +83,19 @@ public class Sessao {
     return novoVoto;
   }
 
+  public TipoResultadoVotacao getResultadoVotacao() {
+    Assert.state(
+        !this.isAberta(), "Não é possível coletar o resultado antes do término da votação");
 
+    var totalVotos = this.votos.size();
+    var totalVotosSim = this.votos.stream().filter(Voto::isVotoSim).count();
+    var totalVotosNao = totalVotos - totalVotosSim;
+
+    if (totalVotosSim == totalVotosNao) {
+      return TipoResultadoVotacao.EMPATE;
+    }
+    return totalVotosSim > totalVotosNao
+        ? TipoResultadoVotacao.APROVADO
+        : TipoResultadoVotacao.REPROVADO;
+  }
 }
