@@ -1,10 +1,10 @@
 package br.com.dbc.desafiotecnico.associado;
 
 import jakarta.persistence.*;
-import java.time.Instant;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Objects;
-
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -15,10 +15,9 @@ public class Associado {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String nome;
+  @NotBlank private String nome;
 
-  @Column(unique = true)
-  private String cpf;
+  @CPF @NotBlank private String cpf;
 
   private LocalDateTime instanteCriacao = LocalDateTime.now();
 

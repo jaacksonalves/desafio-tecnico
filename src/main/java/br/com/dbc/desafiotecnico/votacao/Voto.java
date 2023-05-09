@@ -2,6 +2,7 @@ package br.com.dbc.desafiotecnico.votacao;
 
 import br.com.dbc.desafiotecnico.associado.Associado;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 import org.springframework.util.Assert;
 
@@ -12,9 +13,10 @@ public class Voto {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne private Sessao sessao;
-  @ManyToOne private Associado associado;
+  @NotNull @ManyToOne private Sessao sessao;
+  @NotNull @ManyToOne private Associado associado;
 
+  @NotNull
   @Enumerated(EnumType.STRING)
   private TipoVoto tipoVoto;
 
@@ -53,10 +55,6 @@ public class Voto {
 
   public Long getId() {
     return id;
-  }
-
-  public TipoVoto getTipoVoto() {
-    return tipoVoto;
   }
 
   public boolean pertenceAoAssociado(Associado associado) {

@@ -5,6 +5,8 @@ import br.com.dbc.desafiotecnico.votacao.Sessao;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -15,9 +17,10 @@ public class Pauta {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(unique = true)
+  @NotBlank
   private String titulo;
 
+  @NotBlank
   private String descricao;
 
   @OneToOne(mappedBy = "pauta")

@@ -4,6 +4,7 @@ import br.com.dbc.desafiotecnico.associado.Associado;
 import br.com.dbc.desafiotecnico.pauta.Pauta;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class Sessao {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToOne private Pauta pauta;
+  @NotNull @OneToOne private Pauta pauta;
 
   @OneToMany(
       mappedBy = "sessao",
