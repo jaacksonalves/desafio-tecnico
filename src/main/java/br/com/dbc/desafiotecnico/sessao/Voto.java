@@ -36,8 +36,7 @@ public class Voto {
   /**
    * @deprecated hibernate only
    */
-  public Voto() {
-  }
+  public Voto() {}
 
   @Override
   public boolean equals(Object o) {
@@ -50,5 +49,13 @@ public class Voto {
   @Override
   public int hashCode() {
     return Objects.hash(sessao, associado);
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public boolean pertenceAoAssociado(Associado associado) {
+    return this.associado.equals(associado);
   }
 }

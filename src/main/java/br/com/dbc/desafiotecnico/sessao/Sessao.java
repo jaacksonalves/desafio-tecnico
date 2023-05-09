@@ -1,5 +1,6 @@
 package br.com.dbc.desafiotecnico.sessao;
 
+import br.com.dbc.desafiotecnico.associado.Associado;
 import br.com.dbc.desafiotecnico.pauta.Pauta;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
@@ -18,7 +19,9 @@ public class Sessao {
 
   @OneToOne private Pauta pauta;
 
-  @OneToMany(mappedBy = "sessao")
+  @OneToMany(
+      mappedBy = "sessao",
+      cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   private Set<Voto> votos = new HashSet<>();
 
   private LocalDateTime instanteCriacao = LocalDateTime.now();
@@ -60,4 +63,21 @@ public class Sessao {
   public Long getId() {
     return id;
   }
+
+  public boolean isAberta() {
+    return instanteEncerramento.isAfter(LocalDateTime.now());
+  }
+
+  public boolean jaVotou(Associado associado) {
+    return this.votos.stream().anyMatch(voto -> voto.pertenceAoAssociado(associado));
+  }
+
+  public Voto registraVoto(TipoVoto tipoVoto, Associado associado) {
+    Assert.state(isAberta(), "Sessão já encerrada, por isso não pode mais receber votos");
+    var novoVoto = new Voto(this, associado, tipoVoto);
+    Assert.state(this.votos.add(novoVoto), "Associado provavelmente já votou nesta sessão");
+    return novoVoto;
+  }
+
+
 }
