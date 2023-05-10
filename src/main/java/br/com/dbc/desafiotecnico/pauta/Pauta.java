@@ -68,4 +68,8 @@ public class Pauta {
     this.sessao = request.toModel(this);
     return this.sessao;
   }
+
+  public boolean existeSessao() {
+    return Objects.nonNull(this.sessao);
+  }
 }

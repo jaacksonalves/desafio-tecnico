@@ -4,10 +4,12 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -29,6 +31,11 @@ public class NovaPautaController {
   @PostMapping("/pauta")
   public ResponseEntity<?> novaPauta(
       @Valid @RequestBody NovaPautaRequest request, UriComponentsBuilder uriBuilder) {
+    if (pautaRepository.existsByTitulo(request.titulo())) {
+      logger.info("Pauta já cadastrada: {}", request);
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pauta já cadastrada");
+    }
+
     logger.info("Recebendo request para criar nova pauta: {}", request);
     var novaPauta = request.toModel();
     pautaRepository.save(novaPauta);

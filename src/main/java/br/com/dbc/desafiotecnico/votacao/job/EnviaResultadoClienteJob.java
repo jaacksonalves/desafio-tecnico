@@ -4,10 +4,10 @@ import br.com.dbc.desafiotecnico.mensageria.RegistraResultadoSQSProducer;
 import br.com.dbc.desafiotecnico.votacao.SessaoRepository;
 import java.time.LocalDateTime;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /** jackson: Job que envia o resultado da votação para o cliente */
-@Service
+@Component
 public class EnviaResultadoClienteJob {
 
   private final RegistraResultadoSQSProducer registraResultadoSQSProducer;

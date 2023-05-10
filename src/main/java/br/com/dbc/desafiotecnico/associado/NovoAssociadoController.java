@@ -5,10 +5,12 @@ import static org.slf4j.LoggerFactory.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -30,6 +32,11 @@ public class NovoAssociadoController {
   @PostMapping("/associado")
   public ResponseEntity<?> novoAssociado(
       @Valid @RequestBody NovoAssociadoRequest request, UriComponentsBuilder uriBuilder) {
+    if (associadoRepository.existsByCpf(request.cpf())) {
+      logger.info("Associado já cadastrado: {}", request);
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Associado já cadastrado");
+    }
+
     logger.info("Recebendo request para criar novo associado: {}", request);
     var novoAssociado = request.toModel();
     associadoRepository.save(novoAssociado);

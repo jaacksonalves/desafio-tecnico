@@ -43,8 +43,13 @@ public class NovaSessaoController {
                   return new ResponseStatusException(HttpStatus.NOT_FOUND, "Pauta não encontrada");
                 });
 
+    if (pauta.existeSessao()) {
+      logger.info("Pauta já possui sessão aberta: {}", pautaId);
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pauta já possui sessão aberta");
+    }
+
     logger.info("Recebendo request para criar nova sessão: {}", novaSessaoRequest);
-    Sessao novaSessao = pauta.abreSessao(novaSessaoRequest);
+    var novaSessao = pauta.abreSessao(novaSessaoRequest);
     sessaoRepository.save(novaSessao);
     logger.info("Sessão criada com sucesso: {}", novaSessao);
 
