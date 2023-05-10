@@ -1,4 +1,4 @@
-package br.com.dbc.desafiotecnico.compartilhado;
+package br.com.dbc.desafiotecnico.compartilhado.handler;
 
 import java.util.ArrayList;
 import java.util.List;

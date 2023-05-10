@@ -7,9 +7,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public record NovaSessaoRequest(
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss") @Future LocalDateTime dataEncerramento) {
-  public Sessao toModel(Pauta pauta) {
+  public Sessao toModel(Pauta pauta, int minutoPadraoCasoNaoInformado) {
     var dataEncerramento =
-        this.dataEncerramento != null ? this.dataEncerramento : LocalDateTime.now().plusMinutes(1);
+        this.dataEncerramento != null
+            ? this.dataEncerramento
+            : LocalDateTime.now().plusMinutes(minutoPadraoCasoNaoInformado);
     return new Sessao(pauta, dataEncerramento);
   }
 }

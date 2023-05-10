@@ -1,4 +1,4 @@
-package br.com.dbc.desafiotecnico.compartilhado;
+package br.com.dbc.desafiotecnico.compartilhado.handler;
 
 public class FieldErrorOutputDto {
 

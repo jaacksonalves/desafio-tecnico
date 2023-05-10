@@ -65,7 +65,7 @@ public class Pauta {
   }
 
   public Sessao abreSessao(NovaSessaoRequest request) {
-    this.sessao = request.toModel(this);
+    this.sessao = request.toModel(this, 1);
     return this.sessao;
   }
 

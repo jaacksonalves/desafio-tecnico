@@ -1,4 +1,4 @@
-package br.com.dbc.desafiotecnico.compartilhado;
+package br.com.dbc.desafiotecnico.compartilhado.handler;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import java.util.List;
