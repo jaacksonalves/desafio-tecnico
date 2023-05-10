@@ -1,3 +1,5 @@
+(decidi utilizar Screaming Architecture para organização dos pacotes do projeto)
+
 # API para Gerenciamento de Sessões de Votação em Cooperativas
 
 Esta é uma solução back-end que gerencia sessões de votação em cooperativas. A API REST foi desenvolvida para ser
