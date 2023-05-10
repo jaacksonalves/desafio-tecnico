@@ -35,18 +35,12 @@ public class RegistraVoto {
     /*
     jackson: verifica se o associado pode votar no sistema externo de verificação de CPF
      */
-    try {
-      var statusVerificacaoCPF = verificaAssociadoPodeVotarRemoto.verifica(associado.getCpf());
-      if (UNABLE_TO_VOTE.equals(statusVerificacaoCPF)) {
-        logger.info("Associado não pode votar: {}", associado);
-        throw new ResponseStatusException(
-            HttpStatus.BAD_REQUEST, "Associado não pode votar pois o CPF é inválido");
-      }
 
-    } catch (Exception e) {
-      logger.error("Erro ao consultar serviço externo de validação de CPF", e);
+    var statusVerificacaoCPF = verificaAssociadoPodeVotarRemoto.verifica(associado.getCpf());
+    if (UNABLE_TO_VOTE.equals(statusVerificacaoCPF)) {
+      logger.info("Associado não pode votar: {}", associado);
       throw new ResponseStatusException(
-          HttpStatus.INTERNAL_SERVER_ERROR, "Erro interno, favor tentar novamente em instantes");
+          HttpStatus.BAD_REQUEST, "Associado não pode votar pois o CPF é inválido");
     }
 
     if (!sessao.isAberta()) {

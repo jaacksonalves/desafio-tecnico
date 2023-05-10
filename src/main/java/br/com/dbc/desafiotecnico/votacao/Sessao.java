@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import org.springframework.util.Assert;
@@ -99,5 +100,9 @@ public class Sessao {
     return totalVotosSim > totalVotosNao
         ? TipoResultadoVotacao.APROVADO
         : TipoResultadoVotacao.REPROVADO;
+  }
+
+  public List<Voto> getVotos() {
+    return List.copyOf(this.votos);
   }
 }

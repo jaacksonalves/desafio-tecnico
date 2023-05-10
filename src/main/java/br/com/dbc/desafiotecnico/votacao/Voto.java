@@ -41,6 +41,10 @@ public class Voto {
    */
   public Voto() {}
 
+  public TipoVoto getTipoVoto() {
+    return tipoVoto;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

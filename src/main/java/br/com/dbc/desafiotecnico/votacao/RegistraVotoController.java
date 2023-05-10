@@ -16,7 +16,6 @@ public class RegistraVotoController {
   private static final Logger logger = LoggerFactory.getLogger(RegistraVotoController.class);
 
   private final RegistraVoto registraVoto;
-
   private final SessaoRepository sessaoRepository;
   private final AssociadoRepository associadoRepository;
 
